@@ -1,6 +1,6 @@
 package com.brunocp.data_structure.vector;
 
-public class Test {
+public class TestVector {
 
     public static void main(String[] args) {
 
