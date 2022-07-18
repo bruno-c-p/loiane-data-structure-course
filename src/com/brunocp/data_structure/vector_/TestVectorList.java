@@ -1,4 +1,4 @@
-package com.brunocp.data_structure.vector;
+package com.brunocp.data_structure.vector_;
 
 public class TestVectorList {
 

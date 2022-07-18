@@ -1,12 +1,23 @@
-package com.brunocp.data_structure.vector;
+package com.brunocp.data_structure.vector_;
 
-public class Vector {
+import java.lang.reflect.Array;
 
-    private String[] elements;
+public class VectorList<T> {
+
+    private T[] elements;
     private int vectorSize;
 
-    public Vector(int capacity) {
-        this.elements = new String[capacity];
+    public VectorList(int capacity) {
+        this.elements = (T[]) new Object[capacity]; //effective java solution
+        this.vectorSize = 0;
+    }
+
+    public VectorList() {
+        this(10);
+    }
+
+    public VectorList(int capacity, Class<T> classType) {
+        this.elements = (T[]) Array.newInstance(classType, capacity);
         this.vectorSize = 0;
     }
 
@@ -32,7 +43,7 @@ public class Vector {
         return sb.toString();
     }
 
-    public boolean addElement(String element) {
+    public boolean addElement(T element) {
 
         if (this.vectorSize < this.elements.length) {
 
@@ -45,7 +56,7 @@ public class Vector {
         return false;
     }
 
-    public boolean addElement(int position, String element) {
+    public boolean addElement(int position, T element) {
 
         if (!(position >= 0 && position <= vectorSize)) {
 
@@ -81,7 +92,22 @@ public class Vector {
         this.vectorSize--;
     }
 
-    public String search(int position) {
+    public void removeElement(T element) {
+
+        int position = search(element);
+
+        if (position > - 1) {
+
+            this.removeElement(position);
+        }
+    }
+
+    public T get(int position) {
+
+        return this.search(position);
+    }
+
+    public T search(int position) {
 
         increaseCapacity();
 
@@ -93,7 +119,7 @@ public class Vector {
         return this.elements[position];
     }
 
-    public int search(String element) {
+    public int search(T element) {
 
         for (int i = 0; i < this.vectorSize; i++) {
 
@@ -106,11 +132,44 @@ public class Vector {
         return -1;
     }
 
+    public boolean contains(T element) {
+
+            return this.search(element) > -1;
+    }
+
+    public int lastIndexOf(T element) {
+
+        for (int i = this.vectorSize - 1; i >= 0; i--) {
+
+            if (this.elements[i].equals(element)) {
+
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public void clear() {
+
+        //option 1
+        this.elements = (T[]) new Object[this.elements.length];
+
+        //option 2
+        //this.vectorSize = 0;
+
+        //option 3
+        //for (int i = 0; i < this.vectorSize; i++) {
+        //    this.elements[i] = null;
+        //}
+        //this.vectorSize = 0;
+    }
+
     private void increaseCapacity() {
 
         if (this.vectorSize == this.elements.length) {
 
-            String[] newElements = new String[this.elements.length * 2];
+            T[] newElements = (T[]) new Object[this.elements.length * 2];
 
             for (int i = 0; i < this.elements.length; i++) {
 
@@ -121,36 +180,11 @@ public class Vector {
         }
     }
 
-//    public void addElement(String element) throws Exception {
-//
-//        if (this.vectorSize < this.elements.length) {
-//
-//            this.elements[this.vectorSize] = element;
-//            this.vectorSize++;
-//
-//        } else {
-//
-//            throw new Exception("Vector is full, can't add more elements");
-//        }
-//    }
-
-//    public void addElement(String element) {
-//
-//        for (int i = 0; i < this.elements.length; i++) {
-//
-//            if (this.elements[i] == null) {
-//
-//                this.elements[i] = element;
-//                break;
-//            }
-//        }
-//    }
-
     public int getVectorSize() {
         return vectorSize;
     }
 
-    public String[] getElements() {
+    public Object[] getElements() {
         return elements;
     }
 }

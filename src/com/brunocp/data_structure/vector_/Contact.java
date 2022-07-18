@@ -1,4 +1,4 @@
-package com.brunocp.data_structure.vector;
+package com.brunocp.data_structure.vector_;
 
 import java.util.Objects;
 

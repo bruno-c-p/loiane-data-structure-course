@@ -1,7 +1,7 @@
-package com.brunocp.data_structure.vector.contact_exercise;
+package com.brunocp.data_structure.vector_.contact_exercise;
 
-import com.brunocp.data_structure.vector.Contact;
-import com.brunocp.data_structure.vector.VectorList;
+import com.brunocp.data_structure.vector_.Contact;
+import com.brunocp.data_structure.vector_.VectorList;
 
 import java.util.Scanner;
 
